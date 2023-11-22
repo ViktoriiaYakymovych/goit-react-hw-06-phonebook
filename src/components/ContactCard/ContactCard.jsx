@@ -1,11 +1,13 @@
-import { ListWrapper, Button } from "./ContactCard.styled";
+import { ListWrapper, Button } from './ContactCard.styled';
 
-export const ContactCard = ({ contact: { id, name, number}, onDelete}) => {
+export const ContactCard = ({ contact: { 
+  // id, 
+  name, number } }) => {
   return (
     <ListWrapper>
       <p>{name}</p>
       <p>{number}</p>
-      <Button type="button" onClick={() => onDelete(id)}>Delete</Button>
+      <Button type="button">Delete</Button>
     </ListWrapper>
   );
 };

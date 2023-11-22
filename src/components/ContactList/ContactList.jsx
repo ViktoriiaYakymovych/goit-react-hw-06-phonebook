@@ -1,15 +1,17 @@
-import { nanoid } from 'nanoid';
+import { useSelector } from 'react-redux';
 
 import { ContactCard } from 'components/ContactCard/ContactCard';
 
 import { StyledList } from './ContactList.styled';
 
-export const ContactList = ({ contacts, onDelete}) => {
+export const ContactList = () => {
+  const contacts = useSelector(state => state.contacts);
+
   return (
     <StyledList>
       {contacts.map(contact => (
-        <li key={nanoid()}>
-          <ContactCard contact={contact} onDelete={onDelete}/>
+        <li key={contact.id}>
+          <ContactCard contact={contact} />
         </li>
       ))}
     </StyledList>
