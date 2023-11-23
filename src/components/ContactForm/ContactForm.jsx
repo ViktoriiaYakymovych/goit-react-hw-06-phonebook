@@ -1,3 +1,4 @@
+// import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
 import { nanoid } from 'nanoid';
 import * as Yup from 'yup';
@@ -18,6 +19,7 @@ const schema = Yup.object().shape({
 });
 
 export const ContactForm = ({ addContact }) => {
+  // const dispatch = useDispatch();
   return (
     <Formik
       initialValues={{ name: '', number: '' }}
