@@ -1,6 +1,7 @@
+import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
-import { nanoid } from 'nanoid';
 import * as Yup from 'yup';
+import { addContact } from 'redux/actions';
 
 import {
   StyledForm,
@@ -17,13 +18,15 @@ const schema = Yup.object().shape({
     .required('Number is a required field'),
 });
 
-export const ContactForm = ({ addContact }) => {
+export const ContactForm = () => {
+  const dispatch = useDispatch();
+
   return (
     <Formik
       initialValues={{ name: '', number: '' }}
       validationSchema={schema}
       onSubmit={(values, actions) => {
-        addContact({ ...values, id: nanoid() });
+        dispatch(addContact(values));
         actions.resetForm();
       }}
     >
