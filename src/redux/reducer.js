@@ -22,7 +22,7 @@ const contactsReducer = (state = contactsInitialState, action) => {
 const filterReducer = (state = '', action) => {
     switch (action.type) {
         case 'contacts/filterContacts':
-            // console.log(action.payload);
+            console.log(action.payload);
             return state = action.payload;
         default:
   return state;}
