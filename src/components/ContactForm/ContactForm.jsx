@@ -1,7 +1,9 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { addContact } from 'redux/contactsSlice';
+import { getContacts } from 'redux/selectors';
 
 import {
   StyledForm,
@@ -19,14 +21,28 @@ const schema = Yup.object().shape({
 });
 
 export const ContactForm = () => {
+  const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
+
+  const addNewContact = newContact => {
+    if (
+      contacts.find(
+        contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
+      )
+    ) {
+      return toast.error(
+        `${newContact.name} is already added to Your contact's list`
+      );
+    }
+    dispatch(addContact(newContact));
+  };
 
   return (
     <Formik
       initialValues={{ name: '', number: '' }}
       validationSchema={schema}
       onSubmit={(values, actions) => {
-        dispatch(addContact(values));
+        addNewContact(values);
         actions.resetForm();
       }}
     >
